@@ -1,0 +1,4 @@
+database:
+    image: postgres:9.4
+    ports:
+        - "5432:5432"

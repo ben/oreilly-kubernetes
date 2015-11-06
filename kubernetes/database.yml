@@ -1,0 +1,19 @@
+kind: Service
+apiVersion: v1
+metadata:
+    name: database
+spec:
+    ports:
+        - port: 5432
+
+---
+
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: database
+subsets:
+  - addresses:
+        - IP: 172.20.0.126 # <-- Your RDS instance IP here
+    ports:
+        - port: 5432
