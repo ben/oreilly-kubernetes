@@ -1,9 +1,11 @@
 import sys
 from nose.tools import ok_
 
-from api import views   
+from . import TestCase
 
-def TestApi():
+from api import views
+
+class TestApiViews(TestCase):
     def setUp(self):
         print('setUp', file=sys.stderr)
 

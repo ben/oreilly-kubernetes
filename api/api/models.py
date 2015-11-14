@@ -3,9 +3,13 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import as_declarative
 
 # Database connection init
-CONNSTR = 'postgresql+psycopg2://postgres@database/app_api'
-engine = sa.create_engine(CONNSTR)
-session = scoped_session(sessionmaker(bind=engine))
+session = None
+
+def init_db(db_name='app_api'):
+    global session
+    CONNSTR = 'postgresql+psycopg2://postgres@database/%s' % db_name
+    engine = sa.create_engine(CONNSTR)
+    session = scoped_session(sessionmaker(bind=engine))
 
 @as_declarative()
 class Base():
