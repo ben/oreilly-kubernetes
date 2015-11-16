@@ -1,11 +1,15 @@
-from api import views, models
+from api import views, models, server
 import unittest
 
-class TestCase(unittest.TestCase):
+models.init_db('app_test')
+
+
+class AppTestCase(unittest.TestCase):
     def setUp(self):
-        views.app.config['TESTING'] = True
-        self.app = views.app.test_client()
-        models.init_db('api_test')
+        print('SETUP')
+        server.app.config['TESTING'] = True
+        self.app = server.app.test_client()
 
     def tearDown(self):
+        print('TEARDOWN')
         pass

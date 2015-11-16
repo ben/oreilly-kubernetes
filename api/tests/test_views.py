@@ -1,17 +1,8 @@
-import sys
 from nose.tools import ok_
 
-from . import TestCase
+from . import AppTestCase
 
-from api import views
-
-class TestApiViews(TestCase):
-    def setUp(self):
-        print('setUp', file=sys.stderr)
-
-    def tearDown(self):
-        print('tearDown', file=sys.stderr)
-
+class TestApi(AppTestCase):
     def test_foo_bar(self):
         ok_(True)
         ok_(False)
