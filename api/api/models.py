@@ -1,6 +1,7 @@
 import sqlalchemy as sa
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import as_declarative
+from sqlalchemy_utils.functions import database_exists, create_database
 
 # Database connection init
 session = None
@@ -8,6 +9,10 @@ session = None
 def init_db(db_name='app_api'):
     global session
     CONNSTR = 'postgresql+psycopg2://postgres@database/%s' % db_name
+    # Ensure the db exists
+    if not database_exists(CONNSTR):
+        create_database(CONNSTR)
+    # Connect
     engine = sa.create_engine(CONNSTR)
     session = scoped_session(sessionmaker(bind=engine))
 

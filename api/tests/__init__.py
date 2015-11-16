@@ -3,13 +3,11 @@ import unittest
 
 models.init_db('app_test')
 
-
 class AppTestCase(unittest.TestCase):
     def setUp(self):
-        print('SETUP')
         server.app.config['TESTING'] = True
         self.app = server.app.test_client()
+        self.txn = models.session.begin_nested()
 
     def tearDown(self):
-        print('TEARDOWN')
-        pass
+        self.txn.rollback()
