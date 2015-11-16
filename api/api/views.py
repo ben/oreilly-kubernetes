@@ -1,14 +1,16 @@
 from flask.views import MethodView
+from flask import jsonify
 import json
 
 from api import models
 
 class TodoApi(MethodView):
-    def get(self, user_id):
-        if user_id is None:
+    def get(self, todo_id):
+        if todo_id is None:
             todos = models.Todo.all()
-            return json.dumps([{
+            objs = [{
                 'id': t.id,
                 'title': t.title,
                 'state': t.state,
-            } for t in todos])
+            } for t in todos]
+            return jsonify(**{'items': objs})
