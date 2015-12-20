@@ -12,7 +12,7 @@ class TodoApi(MethodView):
                 'title': t.title,
                 'state': t.state,
             } for t in todos]
-            return jsonify(**{'items': objs})
+            return jsonify(items=objs)
         t = models.Todo.query.get(todo_id)
         return jsonify(
             id=t.id,
@@ -24,5 +24,4 @@ class TodoApi(MethodView):
         t = models.Todo()
         t.set_fields(request.json)
         t.save()
-        db.session.commit()
         return jsonify(id=t.id, title=t.title, state=t.state)

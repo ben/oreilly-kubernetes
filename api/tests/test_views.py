@@ -8,9 +8,6 @@ class TestApi:
         server.app.config['TESTING'] = True
         self.app = server.app.test_client()
         self.txn = db.session.begin_nested()
-        db.session.add(models.Todo(id=1111,
-                                   state='open',
-                                   title='Say Hello'))
 
     def tearDown(self):
         self.txn.rollback()
@@ -31,7 +28,7 @@ class TestApi:
         rv = self.app.get('/todos/')
         eq_(200, rv.status_code)
         body = json.loads(rv.data.decode('utf-8'))
-        eq_(1, len(body['items']))
+        eq_(0, len(body['items']))
 
     def test_create(self):
         rv = self._post_json('/todos/', dict(

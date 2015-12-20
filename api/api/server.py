@@ -1,10 +1,27 @@
 #!/usr/bin/env python3
 
-from flask import Flask
+from flask import Flask, g
 app = Flask(__name__)
-app.debug = True
 
 from api import views, db
+
+@app.before_request
+def setup_transaction():
+    g.txn = db.session.begin_nested()
+
+@app.teardown_request
+def teardown_request(exception):
+    if app.debug:
+        return
+    txn = getattr(g, 'txn')
+    if txn is None:
+        return
+        
+    if exception:
+        db.session.rollback()
+    else:
+        db.session.commit()
+
 
 @app.route('/')
 def hello_world():
