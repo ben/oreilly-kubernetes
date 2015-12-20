@@ -15,6 +15,14 @@ class Base():
     def all(cls):
         return cls.query.all()
 
+    def set_fields(self, dct):
+        for k,v in dct.items():
+            setattr(self, k, v)
+
+    def save(self):
+        session.add(self)
+        session.flush()
+
 def init_db(db_name='app_todo'):
     global engine, session
     CONNSTR = 'postgresql+psycopg2://postgres@database/%s' % db_name
