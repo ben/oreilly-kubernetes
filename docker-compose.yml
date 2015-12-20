@@ -9,3 +9,13 @@ router:
         - "80:80"
     volumes:
         - ./nginx.conf:/etc/nginx/nginx.conf
+    links:
+        - api
+
+api:
+    image: example/api:latest
+    command: --reload
+    volumes:
+        - ./api:/app
+    links:
+        - database
