@@ -1,6 +1,5 @@
 from flask.views import MethodView
 from flask import jsonify
-import json
 
 from api import models
 
@@ -14,3 +13,6 @@ class TodoApi(MethodView):
                 'state': t.state,
             } for t in todos]
             return jsonify(**{'items': objs})
+
+    def post(self, data):
+        pass

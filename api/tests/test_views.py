@@ -1,16 +1,19 @@
 from nose.tools import eq_
 import json
 
-from . import AppTestCase
-from api import models
+from api import models, server, db
 
-class TestApi(AppTestCase):
+class TestApi:
     def setUp(self):
-        super().setUp()
-        # Fixture data
-        models.session.add(models.Todo(id=1,
-                                       state='open',
-                                       title='Say Hello'))
+        server.app.config['TESTING'] = True
+        self.app = server.app.test_client()
+        self.txn = db.session.begin_nested()
+        db.session.add(models.Todo(id=1,
+                                   state='open',
+                                   title='Say Hello'))
+
+    def tearDown(self):
+        self.txn.rollback()
 
     def test_hello_world(self):
         rv = self.app.get('/')

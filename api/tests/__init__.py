@@ -1,13 +1,7 @@
-from api import views, models, server
+from api import views, db, server
 import unittest
 
-models.init_db('app_test')
+import sys
+db.init_db('todo_test')
 
-class AppTestCase(unittest.TestCase):
-    def setUp(self):
-        server.app.config['TESTING'] = True
-        self.app = server.app.test_client()
-        self.txn = models.session.begin_nested()
-
-    def tearDown(self):
-        self.txn.rollback()
+db.Base.metadata.create_all(bind=db.engine)

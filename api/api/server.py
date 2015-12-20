@@ -4,7 +4,7 @@ from flask import Flask
 app = Flask(__name__)
 app.debug = True
 
-from api import views, models
+from api import views, db
 
 @app.route('/')
 def hello_world():
@@ -17,5 +17,5 @@ app.add_url_rule('/todos/', view_func=todo_view, methods=['POST',])
 app.add_url_rule('/todos/<int:todo_id>', view_func=todo_view,
                  methods=['GET', 'PUT', 'DELETE'])
 
-if not models.session:
-    models.init_db()
+if not db.session:
+    db.init_db()
