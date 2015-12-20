@@ -1,7 +1,7 @@
 from flask.views import MethodView
 from flask import jsonify, request
 
-from api import models
+from api import models, db
 
 class TodoApi(MethodView):
     def get(self, todo_id):
@@ -24,4 +24,5 @@ class TodoApi(MethodView):
         t = models.Todo()
         t.set_fields(request.json)
         t.save()
+        db.session.commit()
         return jsonify(id=t.id, title=t.title, state=t.state)
