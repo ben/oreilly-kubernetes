@@ -13,7 +13,7 @@ router:
         - api
 
 api:
-    image: example/api:latest
+    image: benstraub/api:latest
     command: --reload
     volumes:
         - ./api:/app
