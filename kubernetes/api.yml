@@ -1,0 +1,40 @@
+kind: ReplicationController
+apiVersion: v1
+metadata:
+  name: api
+  labels:
+    name: api
+
+spec:
+  replicas: 1
+  selector:
+    name: api
+  template:
+    metadata:
+      labels:
+        name: api
+    spec:
+      containers:
+        - name: api
+          image: benstraub/api:latest
+          ports:
+            - containerPort: 8000
+              protocol: TCP
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: api
+  labels:
+    name: api
+
+spec:
+  ports:
+    - port: 80
+      name: http
+      targetPort: 8000
+  selector:
+    name: api
+  type: LoadBalancer
