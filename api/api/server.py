@@ -2,6 +2,7 @@
 
 from flask import Flask, g
 app = Flask(__name__)
+app.debug = True
 
 from api import views, db
 
@@ -16,12 +17,11 @@ def teardown_request(exception):
     txn = getattr(g, 'txn')
     if txn is None:
         return
-        
+
     if exception:
         db.session.rollback()
     else:
         db.session.commit()
-
 
 @app.route('/')
 def hello_world():
