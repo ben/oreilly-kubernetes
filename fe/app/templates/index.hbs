@@ -1,9 +1,15 @@
 
 <section>
     <input type="text" placeholder="Title">
-    <ul>
+    <ul class="todos">
         {{#each model as |t|}}
-            <li>{{t.title}}</li>
+            <li>
+                <span class="controls">
+                    <a href="#" {{action 'delete' t}}>❌</a>
+                    <a href="#" {{action 'complete' t}}>✅</a>
+                </span>
+                {{t.title}}
+            </li>
         {{else}}
             <em>No todos right now.</em>
         {{/each}}
