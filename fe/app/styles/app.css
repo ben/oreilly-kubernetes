@@ -17,6 +17,10 @@ li {
     opacity: 0;
 }
 
-.todos>li:hover .controls {
+.todos li:hover .controls {
     opacity: 1;
+}
+
+.controls a {
+    text-decoration: none;
 }
