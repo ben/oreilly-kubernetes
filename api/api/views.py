@@ -34,3 +34,9 @@ class TodoApi(MethodView):
         t.set_fields(request.json)
         t.save()
         return jsonify(id=t.id, title=t.title, state=t.state)
+
+    def put(self, todo_id):
+        t = models.Todo.query.get(todo_id)
+        t.set_fields(request.json['todo'])
+        t.save()
+        return self.get(todo_id)
