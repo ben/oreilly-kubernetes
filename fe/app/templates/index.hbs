@@ -3,13 +3,7 @@
     <input type="text" placeholder="Title">
     <ul class="todos">
         {{#each model as |t|}}
-            <li>
-                <span class="controls">
-                    <a href="#" {{action 'delete' t}}>❌</a>
-                    <a href="#" {{action 'complete' t}}>✅</a>
-                </span>
-                {{t.title}}
-            </li>
+            {{todo-item model=t}}
         {{else}}
             <em>No todos right now.</em>
         {{/each}}
