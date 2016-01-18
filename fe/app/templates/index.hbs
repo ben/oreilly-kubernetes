@@ -1,6 +1,11 @@
 
 <section>
     <input type="text" placeholder="Title">
+    <ul>
+        {{#each model as |t|}}
+            <li>{{t.title}}</li>
+        {{else}}
+            <em>No todos right now.</em>
+        {{/each}}
+    </ul>
 </section>
-
-{{outlet}}
