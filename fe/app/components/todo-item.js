@@ -11,7 +11,7 @@ export default Ember.Component.extend({
             this.get('model').save();
         },
         delete() {
-            this.get('model').destroy();
+            this.get('model').destroyRecord();
         }
     },
 

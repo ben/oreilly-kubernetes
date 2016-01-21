@@ -17,9 +17,9 @@ def teardown_request(exception):
         return
 
     if exception:
-        db.session.rollback()
+        txn.rollback()
     else:
-        db.session.commit()
+        txn.commit()
 
 @app.route('/')
 def hello_world():

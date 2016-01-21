@@ -40,3 +40,8 @@ class TodoApi(MethodView):
         t.set_fields(request.json['todo'])
         t.save()
         return self.get(todo_id)
+
+    def delete(self, todo_id):
+        t = models.Todo.query.get(todo_id)
+        db.session.delete(t)
+        return jsonify({'ok': True})
