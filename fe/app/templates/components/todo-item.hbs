@@ -2,10 +2,10 @@
     <span class="controls">
         <a href="#" {{action 'delete'}}>❌</a>
         {{#if isComplete}}
-            <a href="#" {{action 'complete'}}>✅</a>
+            <a href="#" {{action 'uncomplete'}}>🔧</a>
         {{else}}
-            <a href="#" {{action 'uncomplete'}}>✴</a>
+            <a href="#" {{action 'complete'}}>✅</a>
         {{/if}}
     </span>
-    {{model.title}}
+    <span class={{model.state}}>{{model.title}}</span>
 </li>

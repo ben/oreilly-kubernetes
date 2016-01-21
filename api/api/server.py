@@ -12,8 +12,6 @@ def setup_transaction():
 
 @app.teardown_request
 def teardown_request(exception):
-    if app.debug:
-        return
     txn = getattr(g, 'txn')
     if txn is None:
         return

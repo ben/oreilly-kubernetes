@@ -7,7 +7,7 @@ export default Ember.Component.extend({
             this.get('model').save();
         },
         uncomplete() {
-            this.set('model.state', null);
+            this.set('model.state', 'open');
             this.get('model').save();
         },
         delete() {
@@ -16,6 +16,7 @@ export default Ember.Component.extend({
     },
 
     isComplete: function() {
-        return this.get('model.state') == 'complete';
+        console.log(this.get('model.state'));
+        return this.get('model.state') === 'complete';
     }.property('model.state')
 });

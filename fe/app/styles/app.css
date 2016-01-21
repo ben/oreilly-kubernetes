@@ -24,3 +24,8 @@ li {
 .controls a {
     text-decoration: none;
 }
+
+.complete {
+    text-decoration: line-through;
+    opacity: 80%;
+}
