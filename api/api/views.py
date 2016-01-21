@@ -30,10 +30,11 @@ class TodoApi(MethodView):
         })
 
     def post(self):
+        print('POST', request.json)
         t = models.Todo()
-        t.set_fields(request.json)
+        t.set_fields(request.json['todo'])
         t.save()
-        return jsonify(id=t.id, title=t.title, state=t.state)
+        return self.get(t.id)
 
     def put(self, todo_id):
         t = models.Todo.query.get(todo_id)
