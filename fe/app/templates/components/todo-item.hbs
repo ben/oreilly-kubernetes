@@ -1,11 +1,13 @@
 <li>
     <span class="controls">
         <a href="#" {{action 'delete'}}>❌</a>
-        {{#if isComplete}}
-            <a href="#" {{action 'uncomplete'}}>🔧</a>
-        {{else}}
-            <a href="#" {{action 'complete'}}>✅</a>
-        {{/if}}
+        <a href="#" {{action 'toggleComplete'}}>
+            {{#if isComplete}}
+                🔧
+            {{else}}
+                ✅
+            {{/if}}
+        </a>
     </span>
-    <span class={{model.state}}>{{model.title}}</span>
+    <a href="#" {{action 'toggleComplete'}} class={{model.state}}>{{model.title}}</a>
 </li>

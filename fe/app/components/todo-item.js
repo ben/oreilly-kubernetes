@@ -2,12 +2,9 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
     actions: {
-        complete() {
-            this.set('model.state', 'complete');
-            this.get('model').save();
-        },
-        uncomplete() {
-            this.set('model.state', 'open');
+        toggleComplete() {
+            var currentState = this.get('model.state');
+            this.set('model.state', currentState === 'complete' ? 'open' : 'complete');
             this.get('model').save();
         },
         delete() {
