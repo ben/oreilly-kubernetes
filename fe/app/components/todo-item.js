@@ -13,7 +13,6 @@ export default Ember.Component.extend({
     },
 
     isComplete: function() {
-        console.log(this.get('model.state'));
         return this.get('model.state') === 'complete';
     }.property('model.state')
 });
