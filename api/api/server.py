@@ -4,6 +4,9 @@ from flask import Flask, g
 app = Flask(__name__)
 app.debug = True
 
+from flask.ext.cors import CORS
+CORS(app)
+
 from api import views, db
 
 @app.before_request
