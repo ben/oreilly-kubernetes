@@ -2,6 +2,8 @@
 
 # compiled output
 /dist
+/prod
+/dev
 /tmp
 
 # dependencies
