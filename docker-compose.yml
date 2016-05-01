@@ -17,6 +17,7 @@ router:
     links:
         - api
         - fe
+        - mailer
 
 api:
     image: benstraub/api:latest
