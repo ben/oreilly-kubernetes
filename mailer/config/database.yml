@@ -17,13 +17,15 @@
 default: &default
   adapter: postgresql
   encoding: unicode
+  host: database
+  database: mailer
+  username: postgres
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
 
 development:
   <<: *default
-  database: mailer_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -80,6 +82,3 @@ test:
 #
 production:
   <<: *default
-  database: mailer_production
-  username: mailer
-  password: <%= ENV['MAILER_DATABASE_PASSWORD'] %>
