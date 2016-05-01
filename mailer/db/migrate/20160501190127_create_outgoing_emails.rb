@@ -1,11 +1,12 @@
-class CreateOutgoingEmailTable < ActiveRecord::Migration
+class CreateOutgoingEmails < ActiveRecord::Migration
   def change
     create_table :outgoing_emails do |t|
       t.string :to
       t.string :from
       t.string :subject
       t.string :text
-      t.timestamps
+
+      t.timestamps null: false
     end
   end
 end
