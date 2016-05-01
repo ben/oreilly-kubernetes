@@ -3,6 +3,11 @@ database:
     ports:
         - "5432:5432"
 
+redis:
+    image: redis:3.0-alpine
+    ports:
+        - "6379:6379"
+
 router:
     image: nginx
     ports:
@@ -24,3 +29,12 @@ api:
 fe:
     image: benstraub/fe:latest
     command: -c /etc/nginx/nginx-dev.conf
+
+mailer:
+    image: benstraub/mailer:latest
+    volumes:
+        - ./mailer:/app
+    ports:
+        - "3000:3000"
+    links:
+        - database
