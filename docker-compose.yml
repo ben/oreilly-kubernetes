@@ -39,3 +39,13 @@ mailer:
         - "3000:3000"
     links:
         - database
+        - redis
+
+mailerworker:
+    image: benstraub/mailer:latest
+    command: bin/rake resque:work
+    volumes:
+        - ./mailer:/app
+    links:
+        - database
+        - redis
