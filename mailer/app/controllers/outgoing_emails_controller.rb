@@ -12,6 +12,7 @@ class OutgoingEmailsController < ApplicationController
   def create
     oe = OutgoingEmail.new email_params
     if oe.save
+      Resque.enqueue(SendEmail, oe.id)
       render json: oe, status: 201, location: oe
     else
       render json: { errors: oe.errors }, status: 422
