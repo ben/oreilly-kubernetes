@@ -26,6 +26,7 @@ api:
         - ./api:/app
     links:
         - database
+        - mailer
 
 fe:
     image: benstraub/fe:latest
