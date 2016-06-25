@@ -7,22 +7,14 @@ app.debug = True
 from flask_cors import CORS
 CORS(app)
 
-from api import views, db
-
-@app.before_request
-def setup_transaction():
-    g.txn = db.session.begin_nested()
+from api import views, db, models
 
 @app.teardown_request
 def teardown_request(exception):
-    txn = getattr(g, 'txn')
-    if txn is None:
-        return
-
     if exception:
-        txn.rollback()
+        db.session.rollback()
     else:
-        txn.commit()
+        db.session.commit()
 
 @app.route('/')
 def hello_world():
