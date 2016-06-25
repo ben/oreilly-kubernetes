@@ -33,7 +33,7 @@ def send_email():
         )
 
     requests.post('http://mailer:3000/outgoing_emails', data={
-        'to': request.json['to'],
+        'to': request.form['to'],
         'from': 'todos@example.com',
         'subject': 'TODOs',
         'text': '\n'.join(email_lines)

@@ -11,4 +11,7 @@
             <em>No todos right now.</em>
         {{/each}}
     </ul>
+
+    {{input value=destEmailAddress}}
+    <input type="submit" value="Send email summary" {{action 'sendEmail'}}>
 </section>
