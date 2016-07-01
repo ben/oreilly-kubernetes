@@ -7,6 +7,6 @@ Rails.application.load_tasks
 
 require 'resque/tasks'
 
-task 'resque:setup' do
+task 'resque:setup' => :environment do
   ENV['QUEUE'] = 'mailer'
 end
