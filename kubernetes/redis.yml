@@ -1,0 +1,40 @@
+kind: ReplicationController
+apiVersion: v1
+metadata:
+  name: redis
+  labels:
+    name: redis
+
+spec:
+  replicas: 1
+  selector:
+    name: redis
+  template:
+    metadata:
+      labels:
+        name: redis
+    spec:
+      containers:
+        - name: redis
+          imagePullPolicy: Always
+          image: redis:3.0-alpine
+          ports:
+            - containerPort: 6379
+              protocol: TCP
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: redis
+  labels:
+    name: redis
+
+spec:
+  ports:
+    - port: 6379
+      name: http
+      targetPort: 6379
+  selector:
+    name: redis

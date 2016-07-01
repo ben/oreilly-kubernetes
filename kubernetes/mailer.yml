@@ -1,0 +1,64 @@
+kind: ReplicationController
+apiVersion: v1
+metadata:
+  name: mailer
+  labels:
+    name: mailer
+
+spec:
+  replicas: 1
+  selector:
+    name: mailer
+  template:
+    metadata:
+      labels:
+        name: mailer
+    spec:
+      containers:
+        - name: mailer
+          imagePullPolicy: Always
+          image: benstraub/mailer:latest
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: mailer
+  labels:
+    name: mailer
+
+spec:
+  ports:
+    - port: 3000
+      name: http
+      targetPort: 3000
+  selector:
+    name: mailer
+
+---
+
+kind: ReplicationController
+apiVersion: v1
+metadata:
+  name: mailerworker
+  labels:
+    name: mailerworker
+
+spec:
+  replicas: 2
+  selector:
+    name: mailerworker
+  template:
+    metadata:
+      labels:
+        name: mailerworker
+    spec:
+      containers:
+        - name: mailerworker
+          imagePullPolicy: Always
+          image: benstraub/mailer:latest
+          command: ["rake", "resque:work"]
